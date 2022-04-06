@@ -9,6 +9,10 @@ psycopg2-binary = "*"
 django-environ = "*"
 django-on-heroku = "*"
 gunicorn = "*"
+django-extensions = "*"
+djoser = "*"
+pillow = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

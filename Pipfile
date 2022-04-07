@@ -13,6 +13,9 @@ django-extensions = "*"
 djoser = "*"
 pillow = "*"
 django-cors-headers = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [dev-packages]
 

@@ -12,11 +12,16 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 class QuestionSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
+    user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
+    user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
     class Meta:
         model = Question
         fields = (
             "pk",
-            "user",
+            "user_first_name",
+            "user_last_name",
+            "username",
             "title",
             "question",
             "date_asked",

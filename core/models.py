@@ -21,8 +21,8 @@ class Question(models.Model):
         return self.title
 
 class Response(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='responses', default=True)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions', default=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='user_responses', default=True)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='responses', default=True)
     answer = models.TextField(max_length=5000)
     date_answered = models.DateField(auto_now_add=True)
 

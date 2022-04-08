@@ -49,6 +49,9 @@ class QuestionResponseSerializer(serializers.ModelSerializer):
         model = Question
         fields = (
             "pk",
+            "username",
             "title",
+            "question",
+            "date_asked",
             "responses",
         )

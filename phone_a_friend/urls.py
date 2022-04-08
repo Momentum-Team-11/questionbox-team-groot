@@ -9,4 +9,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/questions', api_views.QuestionListView.as_view(), name='api_questions_list'),
     path('api/question/detail/<int:pk>', api_views.QuestionDetailsView.as_view(), name='api_question_details'),
+    path('api/users', api_views.UserListView.as_view(), name='user_list')
 ]

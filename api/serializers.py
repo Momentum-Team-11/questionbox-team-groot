@@ -45,6 +45,7 @@ class ResponseSerializer(serializers.ModelSerializer):
 
 class QuestionResponseSerializer(serializers.ModelSerializer):
     responses = ResponseSerializer(many=True, required=False)
+    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     class Meta:
         model = Question
         fields = (

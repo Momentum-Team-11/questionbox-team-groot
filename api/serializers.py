@@ -2,10 +2,15 @@ from core.models import User, Question, Response
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
+    user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
+    user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
     class Meta:
         model = User
         fields = (
             "id",
+            "user_first_name",
+            "user_last_name",
             "username",
             "photo",
             "about",
@@ -15,7 +20,6 @@ class QuestionSerializer(serializers.ModelSerializer):
     username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
     user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
-    photo = serializers.SlugRelatedField(slug_field='photo', read_only='True'),
     class Meta:
         model = Question
         fields = (
@@ -23,7 +27,6 @@ class QuestionSerializer(serializers.ModelSerializer):
             "user_first_name",
             "user_last_name",
             "username",
-            "photo",
             "title",
             "question",
             "date_asked",

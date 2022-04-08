@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    photo = models.ImageField(default='media//profile_images/default.jpg', upload_to='profile_images/')
+    photo = models.ImageField(default='media/profile_images/default.jpg', upload_to='profile_images/')
     about = models.TextField(max_length=250)
     def __repr__(self):
         return f"<User username={self.username} pk={self.pk}>"

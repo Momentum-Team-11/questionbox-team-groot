@@ -39,7 +39,7 @@ class ResponseSerializer(serializers.ModelSerializer):
         )
 
 class QuestionResponseSerializer(serializers.ModelSerializer):
-    responses = ResponseSerializer(many=True, required=False, source='responses')
+    responses = ResponseSerializer(many=True, required=False)
     class Meta:
         model = Question
         fields = (

@@ -33,13 +33,14 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
 
 class ResponseSerializer(serializers.ModelSerializer):
-    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
+    user = serializers.SerializerMethodField()
+    def get_user(self, obj):
+        return obj.user.username
     class Meta:
         model = Response
         fields = (
             "pk",
             "user",
-            "username",
             "question",
             "answer",
             "date_answered",
@@ -47,15 +48,17 @@ class ResponseSerializer(serializers.ModelSerializer):
 
 class QuestionResponseSerializer(serializers.ModelSerializer):
     responses = ResponseSerializer(many=True, required=False)
-    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
+    user = serializers.SerializerMethodField()
+    def get_user(self, obj):
+        return obj.user.username
     class Meta:
         model = Question
         fields = (
             "pk",
-            "username",
             "title",
             "question",
             "date_asked",
+            "user",
             "responses",
         )
 

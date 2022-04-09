@@ -33,11 +33,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
 
 class ResponseSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     class Meta:
         model = Response
         fields = (
             "pk",
             "user",
+            "username",
             "question",
             "answer",
             "date_answered",
@@ -56,3 +58,7 @@ class QuestionResponseSerializer(serializers.ModelSerializer):
             "date_asked",
             "responses",
         )
+
+# class UserQuestionsSerializer(serializers.ModelSerializer):
+
+# class UserProfileSerializer(serializers.ModelSerializer):

@@ -23,5 +23,5 @@ class QuestionResponseView(generics.ListCreateAPIView):
     serializer_class = ResponseSerializer
 
 class UserQuestionsView(generics.ListCreateAPIView):
-    queryset = User.objects.all()
+    queryset = User.objects.filter('user_id')
     serializer_class = UserSerializer

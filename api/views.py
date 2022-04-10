@@ -17,3 +17,7 @@ class ResponseListView(generics.ListCreateAPIView):
 class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionResponseSerializer
+
+class QuestionResponseView(generics.ListCreateAPIView):
+    queryset = Response.objects.all()
+    serailizer_class = QuestionResponseSerializer

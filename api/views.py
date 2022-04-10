@@ -20,4 +20,4 @@ class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
-    serializer_class = QuestionResponseSerializer
+    serializer_class = ResponseSerializer

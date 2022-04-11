@@ -1,10 +1,11 @@
 from core.models import User, Question, Response
 from rest_framework import serializers
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
     user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
+    questions = serializers.HyperlinkedIdentityField(view_name='user-detail', format='html')
     class Meta:
         model = User
         fields = (
@@ -14,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "photo",
             "about",
+            "questions",
         )
 
 class QuestionSerializer(serializers.ModelSerializer):

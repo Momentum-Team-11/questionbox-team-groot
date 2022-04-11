@@ -5,7 +5,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
     user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
-    questions = serializers.HyperlinkedIdentityField(view_name='user-detail', format='html')
+    questions = serializers.HyperlinkedIdentityField(view_name='my-questions', format='html')
     class Meta:
         model = User
         fields = (
@@ -63,15 +63,3 @@ class QuestionResponseSerializer(serializers.ModelSerializer):
             "user",
             "responses",
         )
-
-class UserQuestionsSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True, required=True)
-    class Meta:
-        model = User
-        fields = (
-            "username",
-            "id",
-            "questions",
-        )
-
-# class UserProfileSerializer(serializers.ModelSerializer):

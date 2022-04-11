@@ -14,7 +14,7 @@ class User(AbstractUser):
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='questions', default=True)
     title = models.CharField(max_length=150, blank=False)
-    question = models.TextField(max_length=5000)
+    question = models.TextField(max_length=5000, blank=False)
     date_asked = models.DateField(auto_now_add=True)
 
     def __str__(self):

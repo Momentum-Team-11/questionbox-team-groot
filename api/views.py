@@ -1,5 +1,5 @@
 from core.models import User, Question, Response
-from .serializers import UserSerializer, QuestionSerializer, ResponseSerializer, QuestionResponseSerializer
+from .serializers import UserSerializer, QuestionSerializer, ResponseSerializer, QuestionResponseSerializer, UserQuestionsSerializer
 from rest_framework import generics
 
 class UserListView(generics.ListCreateAPIView):
@@ -22,6 +22,6 @@ class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
-class UserQuestionsView(generics.ListCreateAPIView):
-    queryset = User.objects.filter('user_id')
-    serializer_class = UserSerializer
+class UserQuestionsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.filter(id=1)
+    serializer_class = UserQuestionsSerializer

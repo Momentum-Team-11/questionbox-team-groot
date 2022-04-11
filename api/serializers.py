@@ -62,6 +62,14 @@ class QuestionResponseSerializer(serializers.ModelSerializer):
             "responses",
         )
 
-# class UserQuestionsSerializer(serializers.ModelSerializer):
+class UserQuestionsSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, required=True)
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "id",
+            "questions",
+        )
 
 # class UserProfileSerializer(serializers.ModelSerializer):

@@ -25,6 +25,8 @@ class Response(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='responses', default=True)
     answer = models.TextField(max_length=5000)
     date_answered = models.DateField(auto_now_add=True)
+    accepted = models.BooleanField(default=False)
+
 
 
     def __str__(self):

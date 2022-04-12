@@ -46,6 +46,7 @@ class ResponseSerializer(serializers.ModelSerializer):
             "question",
             "answer",
             "date_answered",
+            "accepted",
         )
 
 class QuestionResponseSerializer(serializers.ModelSerializer):

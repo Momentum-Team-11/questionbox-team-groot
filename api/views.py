@@ -17,9 +17,15 @@ class ResponseListView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
+
 class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionResponseSerializer
+
+    def accepted(self, request):
+        accepted_answers = Question.objects.filter(accepted=True)
+        serializer = self.get_serializer(accepted_answers, many=True)
+        return Response(serializer.data)
 
 class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
@@ -31,7 +37,7 @@ class UserQuestionsView(generics.ListAPIView):
         return self.request.user.questions.all()
 
 class UserResponsesView(generics.ListAPIView):
-    serializer_class = ResponseSerializer
+    serializer_class = QuestionResponseSerializer
     def get_queryset(self):
         return self.request.user.user_responses.all()
 

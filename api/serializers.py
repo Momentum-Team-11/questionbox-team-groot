@@ -32,6 +32,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             "title",
             "question",
             "date_asked",
+            "favorite",
         )
 
 class ResponseSerializer(serializers.ModelSerializer):

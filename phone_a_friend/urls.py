@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/users/<int:pk>/', api_views.UserQuestionsView.as_view(), name='user-detail'),
     path('api/myquestions/', api_views.UserQuestionsView.as_view(), name='my-questions'),
     path('api/myresponses', api_views.UserResponsesView.as_view(), name='my-responses'),
-    path('api/search', api_views.QuestionSearchView.as_view(), name='question-search')
+    path('api/search', api_views.QuestionSearchView.as_view(), name='question-search'),
+    path('api/questions/favorite/<int:pk>', api_views.QuestionFavoriteView.as_view(), name='favorited'),
 ]

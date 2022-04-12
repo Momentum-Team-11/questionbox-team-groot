@@ -1,6 +1,7 @@
 from core.models import User, Question, Response
 from .serializers import UserSerializer, QuestionSerializer, ResponseSerializer, QuestionResponseSerializer
 from rest_framework import generics
+from rest_framework.decorators import action
 
 class UserListView(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -51,3 +52,12 @@ class QuestionSearchView(generics.ListAPIView):
         search_term = self.request.query_params.get("question")
         if search_term is not None:
             return Question.objects.filter(question__icontains=search_term)
+
+class QuestionFavoriteView(generics.RetrieveUpdateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    @action(detail=False, methods=['get'])
+    def favorited(self, request):
+        question = self.get_queryset().filter(favorited=True).filter(user_id=self.request.user)
+        serializer = self.get_serializer(question, many=True)
+        return Response(serializer.data)

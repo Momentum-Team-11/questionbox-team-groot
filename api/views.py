@@ -29,3 +29,12 @@ class UserQuestionsView(generics.ListAPIView):
     serializer_class = QuestionSerializer
     def get_queryset(self):
         return self.request.user.questions.all()
+
+class QuestionSearchView(generics.ListAPIView):
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
+    def get_queryset(self):
+        search_term = self.request.query_params.get("question")
+        if search_term is not None:
+            return Question.objects.filter(question__icontains=search_term)

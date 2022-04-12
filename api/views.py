@@ -30,6 +30,11 @@ class UserQuestionsView(generics.ListAPIView):
     def get_queryset(self):
         return self.request.user.questions.all()
 
+class UserResponsesView(generics.ListAPIView):
+    serializer_class = ResponseSerializer
+    def get_queryset(self):
+        return self.request.user.user_responses.all()
+
 class QuestionSearchView(generics.ListAPIView):
     serializer_class = QuestionSerializer
     queryset = Question.objects.all()

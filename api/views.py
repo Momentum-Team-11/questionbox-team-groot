@@ -25,11 +25,15 @@ class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionResponseSerializer
 
+class ResponseDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Response.objects.all()
+    serializer_class = ResponseSerializer
+
     def accepted(self, request):
         accepted_answers = Question.objects.filter(accepted=True)
         serializer = self.get_serializer(accepted_answers, many=True)
         return Response(serializer.data)
-
+        
 class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer

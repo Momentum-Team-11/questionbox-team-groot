@@ -36,6 +36,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class ResponseSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
+    title = serializers.SlugRelatedField(slug_field='title', read_only='True', source='question')
     def get_user(self, obj):
         return obj.user.username
     class Meta:
@@ -43,6 +44,7 @@ class ResponseSerializer(serializers.ModelSerializer):
         fields = (
             "pk",
             "user",
+            "title",
             "question",
             "answer",
             "date_answered",

@@ -17,6 +17,8 @@ class ResponseListView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
@@ -37,7 +39,7 @@ class UserQuestionsView(generics.ListAPIView):
         return self.request.user.questions.all()
 
 class UserResponsesView(generics.ListAPIView):
-    serializer_class = QuestionResponseSerializer
+    serializer_class = ResponseSerializer
     def get_queryset(self):
         return self.request.user.user_responses.all()
 

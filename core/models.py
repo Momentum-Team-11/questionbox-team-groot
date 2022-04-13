@@ -20,11 +20,7 @@ class Question(models.Model):
     favorite = models.ManyToManyField(User, related_name='favorited_question', blank=True)
 
     def accepted_response(self):
-        question = Question.objects.all()
-        if question.response.accepted==True:
-            return True
-        else:
-            return ()
+        return self.responses.filter(accepted=True).exists()
 
     def __str__(self):
         return self.title

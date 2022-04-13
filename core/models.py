@@ -1,3 +1,4 @@
+from genericpath import exists
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -18,6 +19,12 @@ class Question(models.Model):
     date_asked = models.DateField(auto_now_add=True)
     favorite = models.ManyToManyField(User, related_name='favorited_question', blank=True)
 
+    def accepted_response(self):
+        if 'accepted'.exists():
+            return answer.pk
+        else:
+            return ()
+
     def __str__(self):
         return self.title
 
@@ -27,6 +34,8 @@ class Response(models.Model):
     answer = models.TextField(max_length=5000)
     date_answered = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
+    favorite = models.ManyToManyField(User, related_name='favorited_answer', blank=True)
+
 
 
 

@@ -33,7 +33,7 @@ class ResponseDetailView(generics.RetrieveUpdateDestroyAPIView):
         accepted_answers = Question.objects.filter(accepted=True)
         serializer = self.get_serializer(accepted_answers, many=True)
         return Response(serializer.data)
-        
+
 class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
@@ -64,4 +64,13 @@ class QuestionFavoriteView(generics.RetrieveUpdateAPIView):
     def favorited(self, request):
         question = self.get_queryset().filter(favorited=True).filter(user_id=self.request.user)
         serializer = self.get_serializer(question, many=True)
+        return Response(serializer.data)
+
+class AnswerFavoriteView(generics.RetrieveUpdateAPIView):
+    queryset = Response.objects.all()
+    serializer_class = ResponseSerializer
+    @action(detail=False, methods=['get'])
+    def favorited(self, request):
+        response = self.get_queryset().filter(favorited=True).filter(user_id=self.request.user)
+        serializer = self.get_serializer(response, many=True)
         return Response(serializer.data)

@@ -22,7 +22,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     username = serializers.SlugRelatedField(slug_field='username', read_only='True', source='user')
     user_first_name = serializers.SlugRelatedField(slug_field='first_name', read_only='True', source='user')
     user_last_name = serializers.SlugRelatedField(slug_field='last_name', read_only='True', source='user')
-    accepted_response = serializers.SerializerMethodField()
+    get_accepted_response = serializers.SerializerMethodField()
     class Meta:
         model = Question
         fields = (
@@ -34,7 +34,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             "question",
             "date_asked",
             "favorite",
-            "accepted_response",
+            "get_accepted_response",
         )
 
 class ResponseSerializer(serializers.ModelSerializer):

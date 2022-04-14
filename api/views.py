@@ -39,7 +39,7 @@ class QuestionResponseView(generics.ListCreateAPIView):
     serializer_class = ResponseSerializer
 
     def get_queryset(self):
-        return self.request.user.user_response.order_by('response.pk')
+        return self.request.user.user_response.order_by('pk')
 
 class UserQuestionsView(generics.ListAPIView):
     serializer_class = QuestionSerializer

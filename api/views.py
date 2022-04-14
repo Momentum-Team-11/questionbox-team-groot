@@ -26,8 +26,8 @@ class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = QuestionResponseSerializer
 
     def get_queryset(self):
-        return self.request.user.user_responses.order_by('pk')
-        
+        return self.order_by('pk')
+
 class ResponseDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
@@ -41,6 +41,8 @@ class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
+    def get_queryset(self):
+        return self.request.user.user_responses.order_by('pk')
 
 class UserQuestionsView(generics.ListAPIView):
     serializer_class = QuestionSerializer

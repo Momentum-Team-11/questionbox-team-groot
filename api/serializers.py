@@ -57,7 +57,7 @@ class ResponseSerializer(serializers.ModelSerializer):
         )
 
 class QuestionResponseSerializer(serializers.ModelSerializer):
-    responses = ResponseSerializer(many=True, required=False)
+    responses = serializers.SerializerMethodField()
     user = serializers.SerializerMethodField()
     accepted_response = serializers.SerializerMethodField()
 
@@ -77,3 +77,7 @@ class QuestionResponseSerializer(serializers.ModelSerializer):
     
     def accepted_response(self, obj):
         return obj.accepted_response()
+
+    def get_responses(self, instance):
+        responses = instance.responses.order_by('pk')
+        return ResponseSerializer(responses, many=True).data

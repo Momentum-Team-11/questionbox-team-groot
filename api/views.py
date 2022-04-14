@@ -38,6 +38,9 @@ class QuestionResponseView(generics.ListCreateAPIView):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
+    def get_queryset(self):
+        return self.request.user.user_response.order_by('response.pk')
+
 class UserQuestionsView(generics.ListAPIView):
     serializer_class = QuestionSerializer
     def get_queryset(self):

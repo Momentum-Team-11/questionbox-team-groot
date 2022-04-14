@@ -25,8 +25,6 @@ class QuestionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionResponseSerializer
 
-    def get_queryset(self):
-        return self.order_by('pk')
 
 class ResponseDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Response.objects.all()
